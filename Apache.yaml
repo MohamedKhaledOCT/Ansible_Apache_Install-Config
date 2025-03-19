@@ -15,4 +15,26 @@
         name: apache2
         state: present
         update_cache: yes
-            
+    - name: Apache config template
+      ansible.builtin.template: 
+        src: apache.conf.j2
+        dest: /etc/apache2/sites-available/000-default.conf
+        mode: '0644'
+        owner: root
+        group: root
+      notify: Restart Apache
+    - name : Enable Apache site config
+      ansible.builtin.command:
+        cmd: a2ensite 000-default.conf
+      notify: Restart Apache
+    - name: Start & enable Apache
+      ansible.builtin.service:
+        name: apache2
+        state: started
+        enabled: true
+  handlers:
+    - name: Restart Apache
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
+

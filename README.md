@@ -1,5 +1,3 @@
-بالطبع! إليك نموذجًا لملف README لمشروعك. يمكنك تخصيصه حسب الحاجة:
-
 ---
 
 # Ansible Apache Deployment with Whitelist

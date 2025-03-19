@@ -2,6 +2,7 @@
 - name: Deploy Apache wirh Whitelist
   hosts : web_servers
   become: yes
+  become_method: ansible.builtin.sudo  
   vars: 
     apache_document_root: /var/www/html
     apache_name: mywebsite.local
@@ -11,10 +12,11 @@
       - 192.168.1.20
   tasks:
     - name: Install Apache
-      ansible.bulitin.apt:
+      ansible.builtin.apt:
         name: apache2
         state: present
         update_cache: yes
+      when: ansible_facts.packages.apache2 is not defined
     - name: Apache config template
       ansible.builtin.template: 
         src: apache.conf.j2

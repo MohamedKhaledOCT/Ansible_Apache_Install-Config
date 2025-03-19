@@ -4,10 +4,10 @@ DocumentRoot {{ apache_document_root }}
 <Directory {{ apache_document_root }}
         AllowOverride None
         Options Indexes FollowSymLinks
-        Requrie all denied 
+        Require all denied 
 
 
         {% for ip in allowed_ips %}
-        Requrie ip {{ ip }}
-        {% end fot %}
+        Require ip {{ ip }}
+        {% endfor %}
 </Directory>
